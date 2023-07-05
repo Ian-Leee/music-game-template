@@ -20,5 +20,6 @@ module.exports = {
             textChannel: interaction.channel,
             interaction
         });
+        client.distube.skip(interaction.member.voice.channel);
     },
 };
