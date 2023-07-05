@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRow
 const fs = require('node:fs');
 
 module.exports = {
-    data: new SlashCommandBuilder().setName("random").setDescription("Replies with pong!"),
+    data: new SlashCommandBuilder().setName("random").setDescription("Play a random song in our database!"),
     async execute(client, interaction) {
         if (!interaction.member.voice.channel)
             return interaction.reply("You need to in a voice channel");
