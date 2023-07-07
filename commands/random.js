@@ -17,18 +17,28 @@ module.exports = {
             return interaction.reply("You need to in a voice channel");
         const data = fs.readFileSync("songs.json");
         const songs = JSON.parse(data);
-        const songId = Math.floor(Math.random() * songs.length);
+        let songId = Math.floor(Math.random() * songs.length);
         const songName = songs[songId].name;
         const songLink = songs[songId].link;
-        const random1 = Math.floor(Math.random() * songs.length);
+        let random1 = Math.floor(Math.random() * songs.length);
         const songName1 = songs[random1].name;
-        const random2 = Math.floor(Math.random() * songs.length);
+        let random2 = Math.floor(Math.random() * songs.length);
         const songName2 = songs[random2].name;
-        const random3 = Math.floor(Math.random() * songs.length);
+        let random3 = Math.floor(Math.random() * songs.length);
+        while (
+            songId == random1 ||
+            songId == random2 ||
+            songId == random3 ||
+            random3 == random2 ||
+            random3 == random1 ||
+            random1 == random2
+        ) {
+            random1 = Math.floor(Math.random() * songs.length);
+            random2 = Math.floor(Math.random() * songs.length);
+            random3 = Math.floor(Math.random() * songs.length);
+        }
         const songName3 = songs[random3].name;
-        const songEmbed = new EmbedBuilder()
-            .setTitle("Music")
-            .setDescription(`猜歌名`);
+        const songEmbed = new EmbedBuilder().setTitle("Music").setDescription(`猜歌名`);
 
         const buttonA = new ButtonBuilder()
             .setCustomId("answer")
@@ -49,18 +59,18 @@ module.exports = {
             .setCustomId("testD")
             .setLabel(` ${songName3}`)
             .setStyle(ButtonStyle.Primary);
-        const randomButton = Math.floor(Math.random() * 4+1);
+        const randomButton = Math.floor(Math.random() * 4 + 1);
         let buttonRow;
-        if(randomButton == 1){
+        if (randomButton == 1) {
             buttonRow = new ActionRowBuilder().addComponents(buttonA, buttonB, buttonC, buttonD);
         }
-        if(randomButton == 2){
-            buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonA,  buttonC, buttonD);
+        if (randomButton == 2) {
+            buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonA, buttonC, buttonD);
         }
-        if(randomButton == 3){
-            buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonA,  buttonD);
+        if (randomButton == 3) {
+            buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonA, buttonD);
         }
-        if(randomButton == 4){
+        if (randomButton == 4) {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonD, buttonA);
         }
 
@@ -75,6 +85,7 @@ module.exports = {
 
         collectorA.on("collect", (collected) => {
             let victory = 0;
+            let result;
             if (collected.customId === "answer") {
                 victory = 1;
             }
@@ -83,9 +94,21 @@ module.exports = {
             } else {
                 console.log("lost");
             }
-            if(victory == 1){
-                collected.reply({ content: "WIN"});
-            }else{collected.reply({ content: "LOSE"});}
+            if (victory == 1) {
+                result = new EmbedBuilder()
+                    .setTitle("WIN!!!")
+                    .setImage(
+                        "https://cdn.discordapp.com/attachments/1125656497108549714/1126701371316514886/YOU_WIN.gif",
+                    );
+                collected.reply({ embeds: [result] });
+            } else {
+                result = new EmbedBuilder()
+                    .setTitle("LOSE!!!")
+                    .setImage(
+                        "https://cdn.discordapp.com/attachments/1125656497108549714/1126703373933101087/YOU_WIN.png",
+                    );
+                collected.reply({ embeds: [result] });
+            }
             client.distube.stop(interaction.member.voice.channel);
             collectorA.stop();
         });
