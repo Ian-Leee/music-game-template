@@ -77,6 +77,8 @@ module.exports = {
         const collectorA = interaction.channel.createMessageComponentCollector({ time: 200000 });
 
         interaction.reply({ embeds: [songEmbed], components: [buttonRow] });
+        let queue = client.distube.getQueue(interaction.guild.id);
+        if (queue) client.distube.stop(interaction.member.voice.channel);
         client.distube.play(interaction.member.voice.channel, songLink, {
             member: interaction.member,
             textChannel: interaction.channel,
@@ -123,8 +125,8 @@ module.exports = {
                 result.setDescription(`結果：${earnings}分\n你現在有 ${earnings} 分!`);
             }
             interaction.followUp({ embeds: [result] });
-            client.distube.stop(interaction.member.voice.channel).catch(err=>{
-                
+            client.distube.stop(interaction.member.voice.channel).catch((err) => {
+                console.log(err);
             });
             const jsonDataOut = JSON.stringify(players);
             fs.writeFileSync("point.json", jsonDataOut);
