@@ -21,22 +21,22 @@ module.exports = {
         const songName = songs[songId].name;
         const songLink = songs[songId].link;
         let random1 = Math.floor(Math.random() * songs.length);
-        const songName1 = songs[random1].name;
         let random2 = Math.floor(Math.random() * songs.length);
-        const songName2 = songs[random2].name;
         let random3 = Math.floor(Math.random() * songs.length);
         while (
             songId == random1 ||
             songId == random2 ||
             songId == random3 ||
-            random3 == random2 ||
-            random3 == random1 ||
-            random1 == random2
+            random1 == random2 ||
+            random1 == random3 ||
+            random2 == random3
         ) {
             random1 = Math.floor(Math.random() * songs.length);
             random2 = Math.floor(Math.random() * songs.length);
             random3 = Math.floor(Math.random() * songs.length);
         }
+        const songName1 = songs[random1].name;
+        const songName2 = songs[random2].name;
         const songName3 = songs[random3].name;
         const songEmbed = new EmbedBuilder().setTitle("Music").setDescription(`猜歌名`);
 
