@@ -64,13 +64,13 @@ module.exports = {
         if (randomButton == 1) {
             buttonRow = new ActionRowBuilder().addComponents(buttonA, buttonB, buttonC, buttonD);
         }
-        if (randomButton == 2) {
+        else if (randomButton == 2) {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonA, buttonC, buttonD);
         }
-        if (randomButton == 3) {
+        else if (randomButton == 3) {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonA, buttonD);
         }
-        if (randomButton == 4) {
+        else (randomButton == 4) {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonD, buttonA);
         }
 
