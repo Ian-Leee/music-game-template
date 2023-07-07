@@ -105,7 +105,8 @@ module.exports = {
                     .setTitle("LOSE!!!")
                     .setImage(
                         "https://cdn.discordapp.com/attachments/1125656497108549714/1126703373933101087/YOU_WIN.png",
-                    );
+                    )
+                    .setFooter({ text: `正確答案為 ${songName}` });
             }
             let found = false;
             for (let i = 0; i < players.length; i++) {
