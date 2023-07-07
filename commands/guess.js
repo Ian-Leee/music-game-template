@@ -63,14 +63,11 @@ module.exports = {
         let buttonRow;
         if (randomButton == 1) {
             buttonRow = new ActionRowBuilder().addComponents(buttonA, buttonB, buttonC, buttonD);
-        }
-        else if (randomButton == 2) {
+        } else if (randomButton == 2) {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonA, buttonC, buttonD);
-        }
-        else if (randomButton == 3) {
+        } else if (randomButton == 3) {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonA, buttonD);
-        }
-        else (randomButton == 4) {
+        } else {
             buttonRow = new ActionRowBuilder().addComponents(buttonB, buttonC, buttonD, buttonA);
         }
 
@@ -134,39 +131,3 @@ module.exports = {
         });
     },
 };
-/*
-const jsonDataIn = fs.readFileSync("point.json");
-let players = JSON.parse(jsonDataIn);
-let found = false;
-for (let i = 0; i < players.length; i++) {
-    //如果有就修改該玩家的 money 並回覆結果
-    if (players[i].id == interaction.user.id) {
-        found = true;
-        players[i].point += earnings;
-
-        //回復結果
-        const diceEmbed = new EmbedBuilder()
-            .setColor("#5865F2")
-            .setDescription(`結果：${earnings}分\n你現在有 ${players[i].point} 分!`);
-        interaction.reply({ embeds: [diceEmbed] });
-        break;
-    }
-}
-
-//如果沒有資料就創建一個新的並回覆結果
-if (found == false) {
-    //創建新的玩家資料
-    players.push({ id: interaction.user.id, point: 0 });
-
-    //回復結果
-    const diceEmbed = new EmbedBuilder()
-        .setColor("#5865F2")
-        .setDescription(`結果：${earnings}分\n你現在有 ${earnings} 分!`);
-    interaction.reply({ embeds: [diceEmbed] });
-}
-
-//stringify players 並存回 players.json
-const jsonDataOut = JSON.stringify(players);
-fs.writeFileSync("point.json", jsonDataOut);
-
-*/
